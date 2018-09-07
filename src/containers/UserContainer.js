@@ -7,7 +7,10 @@ class UserContainer extends Component {
     return (
       <div>
         User Container
-      <UserCard />
+        <div className="ui link cards">
+          {this.props.allUsersState.map( user => <UserCard user={user} key={user.id}/>
+          )}
+        </div>
       </div>
     );
   }
