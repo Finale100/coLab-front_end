@@ -24,8 +24,6 @@ const UserContainer = ({clickedUserState, clickedUserFunction, filterTerm, allUs
       {/* <UserProfile clickedUserState={clickedUserState}/> */}
       </div>
     )
-    // {this.props.allUsersState.map( user => <UserCard user={user} key={user.id}/>)}
-
-  //   );
   }
+
 export default UserContainer

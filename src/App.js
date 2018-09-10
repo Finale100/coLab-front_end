@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
+
 import UserProfile from './components/UserProfile.js'
 import SignUp from './components/SignUp.js'
 import Search from './components/Search.js';
 import UserContainer from './containers/UserContainer.js'
+import ProjectContainer from './containers/ProjectContainer.js'
+import ProjectDetail from './components/ProjectDetail.js'
+
 
 const URL = 'http://localhost:3000/api/v1/users'
+const PROJECT = 'http://localhost:3000/api/v1/projects'
 
 class App extends Component {
 
@@ -15,7 +20,9 @@ class App extends Component {
     allUsers: [],
     searchTerm: "",
     clickedUser: null,
-    clickedUserId: null
+    clickedUserId: null,
+    allProjects: [],
+    selectedProject: null
   }
 
   fetchUsers = () => {
@@ -28,8 +35,19 @@ class App extends Component {
    })
   }
 
+  fetchProjects() {
+   fetch(PROJECT)
+   .then(response => response.json())
+   .then(projects => {
+     this.setState ({
+       allProjects: projects
+     })
+   })
+  }
+
   componentDidMount = () => {
     this.fetchUsers()
+    this.fetchProjects()
   }
 
   onSearchHandler = event => {
@@ -111,6 +129,18 @@ class App extends Component {
       allUsers: this.state.allUsers
     })
   })
+}
+
+  projectHandleClick = (project) => {
+    this.setState({
+      selectedProject: project
+    })
+  }
+
+  projectUnselect = () => {
+    this.setState({
+      selectedProject: null
+    })
   }
 
   render() {
@@ -124,8 +154,10 @@ class App extends Component {
         <Search  onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/>
         <UserContainer
           allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}
-          clickedUserFunction={this.handleClickedUser}
-        />
+          clickedUserFunction={this.handleClickedUser}/>
+        <div className="project">
+        {this.state.selectedProject === null ? <ProjectContainer allProjects={this.state.allProjects} projectHandleClick={this.projectHandleClick}/> : <ProjectDetail currentProject={this.state.selectedProject} projectUnselect={this.projectUnselect}/>}
+        </div>
       </div>
     );
   }
