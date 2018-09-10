@@ -5,12 +5,13 @@ import './App.css';
 import Search from './components/Search.js';
 import UserContainer from './containers/UserContainer.js'
 
-const URL = 'http://localhost:3000/api/v1/users'
+const URL = 'http://localhost:3001/api/v1/users'
 
 class App extends Component {
 
   state = {
-    allUsers: []
+    allUsers: [],
+    searchTerm: ""
   }
 
   fetchUsers = () => {
@@ -27,11 +28,15 @@ class App extends Component {
     this.fetchUsers()
   }
 
+  onSearchHandler = event => {
+  this.setState({ searchTerm: event.target.value });
+};
+
   render() {
     return (
       <div className="App">
-        <Search />
-        <UserContainer allUsersState={this.state.allUsers}/>
+        <Search  onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/>
+        <UserContainer allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}/>
       </div>
     );
   }
