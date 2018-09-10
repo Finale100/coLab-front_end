@@ -1,33 +1,37 @@
 import React, {Component} from 'react'
+import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 class UserCard extends Component {
   render() {
     return (
-      // <div className="ui link cards">
-        <div className="card">
-          <div className="image">
-            <img src={this.props.user.img_url} />
-          </div>
-          <div className="content">
-            <div className="header">{this.props.user.name}</div>
-            <div className="meta">
-              <a>{this.props.user.skill}</a>
-            </div>
-            <div className="description">
+        <Card>
+          <Image src={this.props.user.img_url} />
+          <Card.Content>
+            <Card.Header>{this.props.user.name}</Card.Header>
+            <Card.Meta>
+              <span className='date'>{this.props.user.skill}</span>
+            </Card.Meta>
+            <Card.Description>
               {this.props.user.bio}
-            </div>
-          </div>
-          <div className="extra content">
+            </Card.Description>
+          </Card.Content>
+          <Card.Content extra>
             <span className="right floated">
-              {this.props.user.availability ? 'Available' : 'Unavailable'}
+                <Button primary size='mini'>Add to Team</Button>
             </span>
-            <span>
-              <i className="globe icon"></i>
-              Location:
-            </span>
-          </div>
-        </div>
-      // </div>
+              {this.props.user.availability
+                ?
+                <a>
+                <Icon name='calendar check outline'/>Available
+                </a>
+                :
+                <a>
+                <Icon name='calendar times outline'/>Unavailable
+                </a>
+              }
+          </Card.Content>
+        </Card>
+
     );
   }
 }
