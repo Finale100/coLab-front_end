@@ -2,9 +2,19 @@ import React, {Component} from 'react'
 import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 class UserCard extends Component {
+
+  // constructor(props) {
+  //   super(props)
+  //   console.log(this.props)
+  // }
+
   render() {
     return (
-        <Card>
+        <Card
+          onClick={() => {
+            this.props.clickedUserFunction(this.props.user)
+          }}
+          >
           <Image src={this.props.user.img_url} />
           <Card.Content>
             <Card.Header>{this.props.user.name}</Card.Header>
