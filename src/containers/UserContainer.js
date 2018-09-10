@@ -14,12 +14,9 @@ const UserContainer = ({filterTerm, allUsersState}) => {
         ))
       <div>
         User Container
-        {/* <div className="ui link cards"> */}
         <Card.Group>
           {this.props.allUsersState.map( user => <UserCard user={user} key={user.id}/>)}
-        {/* </div> */}
       </Card.Group>
       </div>
     );
   }
-
