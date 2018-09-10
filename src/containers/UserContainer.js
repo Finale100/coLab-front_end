@@ -9,14 +9,15 @@ const UserContainer = ({filterTerm, allUsersState}) => {
   let filteredUsers = allUsersState.filter(user =>
   user.name.toLowerCase().includes(filterTerm.toLowerCase())
 )
-    return filteredUsers.map(user => (
-          <UserCard user={user} key={user.id}/>
-        ))
+
+    return(
       <div>
         User Container
         <Card.Group>
-          {this.props.allUsersState.map( user => <UserCard user={user} key={user.id}/>)}
+      {filteredUsers.map(user => <UserCard user={user} key={user.id}/>)}
       </Card.Group>
       </div>
-    );
+    )
   }
+
+export default UserContainer
