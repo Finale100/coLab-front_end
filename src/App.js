@@ -5,7 +5,7 @@ import './App.css';
 import Search from './components/Search.js';
 import UserContainer from './containers/UserContainer.js'
 
-const URL = 'http://localhost:3001/api/v1/users'
+const URL = 'http://localhost:3000/api/v1/users'
 
 class App extends Component {
 
