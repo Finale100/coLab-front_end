@@ -4,6 +4,10 @@
 	margin: 0 auto;
 }
 
+.project {
+  margin-top: 15px;
+}
+
 .topheader {
   height: 600px;
   background-image: url();
@@ -27,6 +31,7 @@
 	display: grid;
 	grid-template-columns: 2fr 2fr;
 }
+
 
 
 /* .App {
