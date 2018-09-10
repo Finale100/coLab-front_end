@@ -9,6 +9,7 @@ const UserContainer = ({filterTerm, allUsersState}) => {
   let filteredUsers = allUsersState.filter(user =>
   user.name.toLowerCase().includes(filterTerm.toLowerCase())
 )
+
     return(
       <div>
         User Container
@@ -22,3 +23,4 @@ const UserContainer = ({filterTerm, allUsersState}) => {
   //   );
   }
 export default UserContainer
+
