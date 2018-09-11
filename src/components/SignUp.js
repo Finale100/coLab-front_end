@@ -38,7 +38,7 @@ class SignUp extends Component {
       <Form
         onSubmit={ e => {
           e.preventDefault()
-          this.props.handleNewUserForm(this.state.value)
+          this.props.handleNewUserForm(e, this.state.value)
         }}>
         <Form.Group widths='equal'>
           <Form.Input
