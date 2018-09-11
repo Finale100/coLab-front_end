@@ -32,7 +32,7 @@ class App extends Component {
    .then(users => {
      this.setState({
        allUsers: users
-     })
+     }, () => {console.log(this.state.allUsers)})
    })
   }
 
@@ -56,7 +56,6 @@ class App extends Component {
   };
 
   handleNewUser = (e, value) => {
-    // console.log(value);
     fetch(URL, {
       method: "POST",
       headers: {
@@ -73,7 +72,6 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
       this.setState({
         allUsers: [...this.state.allUsers, data]
       })
@@ -173,7 +171,26 @@ class App extends Component {
     this.updateDeletedProject(arr)
   }
 
+  filterUser = () => {
+    console.log('working')
+    return this.state.allUsers.filter(user => user.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+  }
+
+  userComponentLogic = () => {
+    if (this.state.clickedUser === null) {
+      console.log(this.state.allUsers);
+      let results = this.state.searchTerm === '' ? this.state.allUsers : this.filterUser();
+      return <UserContainer users={results} filterTerm={this.state.searchTerm}
+      clickedUserFunction={this.handleClickedUser}/>
+    } else {
+      return <UserProfile clickedUserState={this.state.clickedUser}
+      handleEditUserForm={this.handleEditUser}
+      handleDeleteUserButton={this.handleDeleteUser}/>
+    }
+  }
+
   render() {
+    const userComponent = this.userComponentLogic()
     return (
       <React.Fragment>
         <NavBar
@@ -204,10 +221,7 @@ class App extends Component {
                 <React.Fragment>
                   <Search  onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/>
                   <div className="project">
-                  {this.state.clickedUser === null ? <UserContainer allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}
-                  clickedUserFunction={this.handleClickedUser}/> : <UserProfile clickedUserState={this.state.clickedUser}
-                  handleEditUserForm={this.handleEditUser}
-                  handleDeleteUserButton={this.handleDeleteUser}/>}
+                  {userComponent}
                   </div>
                 </React.Fragment>
               )
@@ -221,7 +235,8 @@ class App extends Component {
                 <React.Fragment>
                   <Search  onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/>
                   <div className="project">
-                  {this.state.selectedProject === null ? <ProjectContainer allProjects={this.state.allProjects} projectHandleClick={this.projectHandleClick} updateProject={this.updateProject}/> : <ProjectDetail currentProject={this.state.selectedProject} projectUnselect={this.projectUnselect} deleteProject={this.deleteProject}/>}
+                  {this.state.selectedProject === null ? <ProjectContainer allProjects={this.state.allProjects} projectHandleClick={this.projectHandleClick} updateProject={this.updateProject}/> : <ProjectDetail
+                  allUsersState={this.state.allUsers} currentProject={this.state.selectedProject} projectUnselect={this.projectUnselect} deleteProject={this.deleteProject}/>}
                   </div>
                 </React.Fragment>
               )

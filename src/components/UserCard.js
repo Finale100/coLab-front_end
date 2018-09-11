@@ -6,12 +6,8 @@ export default class UserCard extends Component {
 
   render() {
     return (
-        <Card
-          onClick={() => {
-            this.props.clickedUserFunction(this.props.user)
-          }}
-          >
-          <Image src={this.props.user.img_url} />
+        <Card>
+          <Image src={this.props.user.img_url} onClick={() => {this.props.clickedUserFunction(this.props.user)}} />
           <Card.Content>
             <Card.Header>{this.props.user.name}</Card.Header>
             <Card.Meta>
@@ -23,7 +19,7 @@ export default class UserCard extends Component {
           </Card.Content>
           <Card.Content extra>
             <span className="right floated">
-                <Button primary size='mini'>Add to Team</Button>
+                <Button primary size='mini' onClick={() => this.props.addTeam(this.props.user)}>Add to Team</Button>
             </span>
               {this.props.user.availability
                 ?

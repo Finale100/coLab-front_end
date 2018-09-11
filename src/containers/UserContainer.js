@@ -4,24 +4,20 @@ import UserCard from '../components/UserCard.js'
 import UserProfile from '../components/UserProfile.js'
 
 
-const UserContainer = ({clickedUserState, clickedUserFunction, filterTerm, allUsersState}) => {
-
-  let filteredUsers = allUsersState.filter(user =>
-  user.name.toLowerCase().includes(filterTerm.toLowerCase())
-)
-
+const UserContainer = ({clickedUserState, clickedUserFunction, filterTerm, users, addTeam}) => {
     return(
       <div>
-        User Container
+        <h3>Users:</h3>
         <Card.Group>
-      {filteredUsers.map(user => <UserCard
+      {users.map(user => {
+          return <UserCard
           user={user}
           key={user.id}
           clickedUserFunction={clickedUserFunction}
-        />
+          addTeam={addTeam}
+        />}
       )}
       </Card.Group>
-      {/* <UserProfile clickedUserState={clickedUserState}/> */}
       </div>
     )
   }
