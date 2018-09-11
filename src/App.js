@@ -36,7 +36,7 @@ class App extends Component {
     this.setState({ searchTerm: event.target.value });
   };
 
-  handleNewUser = (value) => {
+  handleNewUser = (e, value) => {
     // console.log(value);
     fetch(URL, {
       method: "POST",
@@ -55,11 +55,11 @@ class App extends Component {
     .then(response => response.json())
     .then(data => {
       console.log(data)
-      // this.setState({
-      //   ...this.state.allUsers,
-      //   allUsers: data
-      // })
+      this.setState({
+        allUsers: [...this.state.allUsers, data]
+      })
     })
+    e.currentTarget.reset()
   }
 
   handleClickedUser = (user) => {
@@ -89,11 +89,17 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
-      // this.setState({
-      //   ...this.state.allUsers,
-      //   allUsers: data
-      // })
+      // console.log(data)
+      let editedUser = this.state.allUsers.map(user => {
+        if (user.id === id) {
+          return data
+        } else {
+          return user
+        }
+      })
+      this.setState({
+        allUsers: editedUser
+      })
     })
   }
 
