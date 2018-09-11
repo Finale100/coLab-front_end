@@ -4,7 +4,7 @@ import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 const NewProject = (props) => {
   return (
-  <Form>
+  <Form><h3>New Project Form</h3>
     <Form.Field>
       <label>Title</label>
       <input placeholder='Title' />
