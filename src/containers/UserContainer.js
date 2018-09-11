@@ -12,7 +12,7 @@ const UserContainer = ({clickedUserState, clickedUserFunction, filterTerm, allUs
 
     return(
       <div>
-        User Container
+        <h2>Users:</h2>
         <Card.Group>
       {filteredUsers.map(user => <UserCard
           user={user}

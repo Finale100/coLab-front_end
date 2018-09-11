@@ -29,13 +29,13 @@ export default class ProjectContainer extends React.Component {
   render() {
     return (
         <div>
+          <div>
+          <NewProject postProject={this.postProject}/>
+          </div>
           <h2>Projects:</h2>
           <Card.Group>
             {this.props.allProjects.map(project => <ProjectCard project={project} key={project.id} onClick={this.props.projectHandleClick}/>)}
           </Card.Group>
-          <div>
-          <NewProject postProject={this.postProject}/>
-          </div>
         </div>
     )
   }
