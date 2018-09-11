@@ -3,7 +3,7 @@ import { Card } from 'semantic-ui-react'
 import ProjectCard from '../components/ProjectCard.js'
 import NewProject from '../components/NewProject.js'
 
-class ProjectContainer extends React.Component {
+export default class ProjectContainer extends React.Component {
 
 
   postProject = (e) => {
@@ -40,5 +40,3 @@ class ProjectContainer extends React.Component {
     )
   }
 }
-
-export default ProjectContainer

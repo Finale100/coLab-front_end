@@ -156,6 +156,13 @@ class App extends Component {
     })
   }
 
+  updateDeletedProject = (arr) => {
+    this.setState({
+      allProjects: arr,
+      selectedProject: null
+    })
+  }
+
   deleteProject = (project) => {
     let arr = [...this.state.allProjects]
     let index = arr.indexOf(project)
@@ -163,9 +170,7 @@ class App extends Component {
     fetch(`${PROJECT}/${project.id}`, {
       method: 'DELETE'
     })
-    this.setState({
-      allProjects: arr
-    })
+    this.updateDeletedProject(arr)
   }
 
   render() {
@@ -179,6 +184,7 @@ class App extends Component {
           />
 
       <div className="App">
+
         <Switch>
           <Route
             path='/signup'
@@ -202,9 +208,6 @@ class App extends Component {
                   clickedUserFunction={this.handleClickedUser}/> : <UserProfile clickedUserState={this.state.clickedUser}
                   handleEditUserForm={this.handleEditUser}
                   handleDeleteUserButton={this.handleDeleteUser}/>}
-                  {/* <UserContainer
-                    allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}
-                    clickedUserFunction={this.handleClickedUser}/> */}
                   </div>
                 </React.Fragment>
               )
@@ -225,23 +228,6 @@ class App extends Component {
             }}
           />
 
-          {/* <UserContainer
-            allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}
-            clickedUserFunction={this.handleClickedUser}/> */}
-
-          {/* {this.state.clickedUser === null ? <UserContainer allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}
-          clickedUserFunction={this.handleClickedUser}/> : <UserProfile clickedUserState={this.state.clickedUser}
-          handleEditUserForm={this.handleEditUser}
-          handleDeleteUserButton={this.handleDeleteUser}/>} */}
-
-          {/* <SignUp handleNewUserForm={this.handleNewUser}/> */}
-
-          {/* <Search  onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/> */}
-
-
-          {/* <div className="project">
-          {this.state.selectedProject === null ? <ProjectContainer allProjects={this.state.allProjects} projectHandleClick={this.projectHandleClick} updateProject={this.updateProject}/> : <ProjectDetail currentProject={this.state.selectedProject} projectUnselect={this.projectUnselect} deleteProject={this.deleteProject}/>}
-          </div> */}
         </Switch>
       </div>
     </React.Fragment>
