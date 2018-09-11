@@ -2,6 +2,8 @@ import React from 'react'
 import { Segment, Image, Grid, Button } from 'semantic-ui-react'
 
 const ProjectDetail = props => {
+
+
   return (
     <Segment>
       <Grid>
@@ -25,6 +27,9 @@ const ProjectDetail = props => {
       </Grid>
       <button className="ui button fluid" size='huge' onClick={props.projectUnselect}>
         Go Back
+      </button>
+      <button className="ui button fluid" size='huge' onClick={() => props.deleteProject(props.currentProject)}>
+        Delete
       </button>
     </Segment>
   )

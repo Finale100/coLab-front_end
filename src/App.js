@@ -61,13 +61,31 @@ class App extends Component {
     })
   }
 
+  updateProject = (project) => {
+    this.setState({
+      allProjects: [...this.state.allProjects, project]
+    })
+  }
+
+  deleteProject = (project) => {
+    let arr = [...this.state.allProjects]
+    let index = arr.indexOf(project)
+    arr.splice(index, 1)
+    fetch(`${PROJECT}/${project.id}`, {
+      method: 'DELETE'
+    })
+    this.setState({
+      allProjects: arr
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <Search onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/>
         <UserContainer allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}/>
         <div className="project">
-        {this.state.selectedProject === null ? <ProjectContainer allProjects={this.state.allProjects} projectHandleClick={this.projectHandleClick}/> : <ProjectDetail currentProject={this.state.selectedProject} projectUnselect={this.projectUnselect}/>}
+        {this.state.selectedProject === null ? <ProjectContainer allProjects={this.state.allProjects} projectHandleClick={this.projectHandleClick} updateProject={this.updateProject}/> : <ProjectDetail currentProject={this.state.selectedProject} projectUnselect={this.projectUnselect} deleteProject={this.deleteProject}/>}
         </div>
 
       </div>

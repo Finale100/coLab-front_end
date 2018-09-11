@@ -21,7 +21,9 @@ class ProjectContainer extends React.Component {
         max_member: e.currentTarget.form[4].value
       })
   }).then (r => r.json())
-    .then(project => console.log(project))
+    .then(project => this.props.updateProject(project)
+  )
+  e.currentTarget.form.reset()
 }
 
   render() {
