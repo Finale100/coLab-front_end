@@ -7,7 +7,7 @@ import UserProfile from '../components/UserProfile.js'
 const UserContainer = ({clickedUserState, clickedUserFunction, filterTerm, users, addTeam}) => {
     return(
       <div>
-        <h3>Users:</h3>
+        <h2>Users:</h2>
         <Card.Group>
       {users.map(user => {
           return <UserCard

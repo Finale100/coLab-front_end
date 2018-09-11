@@ -2,6 +2,7 @@
 .App {
 	width: 80%;
 	margin: 0 auto;
+	padding: 50px 0;
 }
 
 .project {
@@ -9,22 +10,35 @@
 }
 
 .topheader {
-  height: 600px;
-  background-image: url();
+  height: 400px;
+  background-image: url('https://images.pexels.com/photos/955450/pexels-photo-955450.jpeg');
   background-position: center;
   background-size: cover;
 }
 
 .form {
-	width: 50%;
+	width: 25%;
 	margin: 0 auto;
-	padding: 20px 0;
+	padding: 100px 0;
 }
 
 #main-page-title {
-  font-family: sans-serif;
-  color: white;
+  /* font-family: sans-serif; */
+	margin: 0 auto;
+  color: black;
   font-size: 50px;
+}
+
+.ui.menu {
+	margin: 0;
+}
+
+.ui.icon.input input {
+	width: 100%;
+}
+
+.ui.large.input {
+  width: 100%;
 }
 
 .container {

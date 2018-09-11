@@ -14,6 +14,7 @@ const NavBar = props => {
      <NavLink
        exact
        to="/signup"
+       // align='right'
        activeClassName="ui active item"
        className="ui item">
        Sign Up

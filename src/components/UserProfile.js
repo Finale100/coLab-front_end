@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Segment, Image, Grid, Form, Radio, Button } from 'semantic-ui-react'
+// import {withRouter} from 'react-router-dom';
 
 class UserProfile extends Component {
 
@@ -58,6 +59,7 @@ class UserProfile extends Component {
            onSubmit={ e => {
              e.preventDefault()
              this.props.handleEditUserForm(this.state.value)
+             this.props.userUnselect()
            }}>
            <Form.Group widths='equal'>
              <Form.Input
@@ -111,13 +113,17 @@ class UserProfile extends Component {
          </div>
          <Button
            primary
-           onClick={(e) => {
-             this.props.handleDeleteUserButton(e)
+           onClick={() => {
+             this.props.handleDeleteUserButton(this.props.clickedUserState)
            }}
            >Delete Profile</Button>
+           <Button
+             primary
+             onClick={this.props.userUnselect}
+            >Go Back</Button>
        </Segment>
     );
   }
 }
 
-export default UserProfile;
+export default UserProfile

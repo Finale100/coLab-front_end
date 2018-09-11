@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import { Form, Radio } from 'semantic-ui-react'
+// import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 
 class SignUp extends Component {
 
@@ -34,12 +36,15 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div>Sign Up Component
+      <div>
       <Form
         onSubmit={ e => {
           e.preventDefault()
           this.props.handleNewUserForm(e, this.state.value)
-        }}>
+          this.props.history.push('/')
+        }}
+        // action='http://localhost:3001/'
+        ><h3>Create An Account</h3>
         <Form.Group widths='equal'>
           <Form.Input
             name='name'
@@ -87,7 +92,12 @@ class SignUp extends Component {
           placeholder='Tell us more about you...' />
         <Form.Checkbox
           label='I agree to the Terms and Conditions' />
+        {/* <Link
+          exact
+          to="/"
+          > */}
         <Form.Button>Submit</Form.Button>
+        {/* </Link> */}
       </Form>
       </div>
     )
@@ -95,4 +105,4 @@ class SignUp extends Component {
 
 }
 
-export default SignUp
+export default withRouter(SignUp)
