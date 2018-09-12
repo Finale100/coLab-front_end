@@ -170,7 +170,7 @@ class App extends Component {
         max_member: e.currentTarget.form[4].value
       })
   }).then (r => r.json())
-    .then(project => this.props.updateProject(project)
+    .then(project => this.updateProject(project)
   )
   e.currentTarget.form.reset()
 }
