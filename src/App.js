@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
 
+import NewProject from './components/NewProject.js'
 import NavBar from './components/NavBar.js'
 import UserProfile from './components/UserProfile.js'
 import SignUp from './components/SignUp.js'
@@ -154,6 +155,26 @@ class App extends Component {
     })
   }
 
+  postProject = (e) => {
+    fetch('http://localhost:3000/api/v1/projects', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: e.currentTarget.form[0].value,
+        img_url: e.currentTarget.form[1].value,
+        description: e.currentTarget.form[5].value,
+        start_date: e.currentTarget.form[2].value,
+        end_date: e.currentTarget.form[3].value,
+        max_member: e.currentTarget.form[4].value
+      })
+  }).then (r => r.json())
+    .then(project => this.props.updateProject(project)
+  )
+  e.currentTarget.form.reset()
+}
+
   projectHandleClick = (project) => {
     this.setState({
       selectedProject: project
@@ -203,7 +224,7 @@ class App extends Component {
     } else {
       return <UserProfile clickedUserState={this.state.clickedUser}
       handleEditUserForm={this.handleEditUser}
-      handleDeleteUserButton={this.handleDeleteUser}/>
+      handleDeleteUserButton={this.handleDeleteUser} userUnselect={this.userUnselect}/>
     }
   }
 
@@ -222,10 +243,8 @@ class App extends Component {
             path='/signup'
             render={() => {
               return(
-                // <div className="App">
-                  <SignUp handleNewUserForm={this.handleNewUser}
-                  />
-                // </div>
+                <SignUp handleNewUserForm={this.handleNewUser}
+                />
               )
             }}
           />
@@ -239,16 +258,14 @@ class App extends Component {
                     <Search  onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/>
                   </div>
                   <div className="App">
-                    {this.state.clickedUser === null ? <UserContainer allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}
+                    {userComponent}
+                    {/* {this.state.clickedUser === null ? <UserContainer allUsersState={this.state.allUsers} filterTerm={this.state.searchTerm}
                     clickedUserFunction={this.handleClickedUser}/> : <UserProfile
                     clickedUserState={this.state.clickedUser}
                     handleEditUserForm={this.handleEditUser}
                     userUnselect={this.userUnselect}
-                    handleDeleteUserButton={this.handleDeleteUser}/>}
+                    handleDeleteUserButton={this.handleDeleteUser}/>} */}
                    </div>
-                  <div className="project">
-                  {userComponent}
-                  </div>
                 </React.Fragment>
               )
             }}
@@ -258,8 +275,9 @@ class App extends Component {
             render={() => {
               return(
                 <React.Fragment>
-                  <div class='topheader'>
-                    <Search  onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/>
+                  <div class='projecttopheader'>
+                    <NewProject postProject={this.postProject}/>
+                    {/* <Search  onChangeHandler={this.onSearchHandler} value={this.state.searchTerm}/> */}
                   </div>
                   <div className="App">
                     <div className="project">

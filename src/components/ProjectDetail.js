@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Image, Grid, Button } from 'semantic-ui-react'
+import { Card, Segment, Image, Grid, Button } from 'semantic-ui-react'
 import UserCard from './UserCard.js'
 import UserContainer from '../containers/UserContainer.js'
 
@@ -67,10 +67,31 @@ componentDidMount = () =>{
             <h5>End Date: {this.props.currentProject.end_date}</h5>
           </Grid.Column>
           <Grid.Column width={10}>
-            <div><h4>Team Members: </h4>{this.props.currentProject.users.map(user => <span> {user.name} </span>)}
+            <div>
+              <h4>Team Members:</h4>
+              <Card.Group>
+                {this.props.currentProject.users.map(user => {
+                    return(
+                      <Card>
+                        <Image src={user.img_url} />
+                        <Card.Content>
+                          <Card.Header>{user.name}</Card.Header>
+                          <Card.Meta>
+                            <span className='date'>{user.skill}</span>
+                          </Card.Meta>
+                          <Card.Description>
+                            {user.bio}
+                          </Card.Description>
+                        </Card.Content>
+                      </Card>
+                    )
+                  })}
+               </Card.Group>
+
             </div>
           </Grid.Column>
         </Grid>
+        <div className='project-buttons'>
         <button className="ui medium button" size='huge' onClick={this.props.projectUnselect}>
           Go Back
         </button>
@@ -82,6 +103,7 @@ componentDidMount = () =>{
         </button>
         <div>
         {this.state.buildTeam === true ? <UserContainer users={availabile} addTeam={this.addTeam}/> : null}
+        </div>
         </div>
       </Segment>
     )

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import { Segment, Image, Grid, Form, Radio, Button } from 'semantic-ui-react'
-// import {withRouter} from 'react-router-dom';
+import { Card, Icon, Segment, Image, Grid, Form, Radio, Button } from 'semantic-ui-react'
 
 class UserProfile extends Component {
 
@@ -50,18 +49,40 @@ class UserProfile extends Component {
              <h5>Skill: {this.props.clickedUserState.skill}</h5>
            </Grid.Column>
            <Grid.Column width={10}>
-             <div><h4>Projects: </h4>{this.props.clickedUserState.projects.map(project => <span> {project.title} </span>)}
+             <div><h4>Projects: </h4>
+             <Card.Group>
+               {this.props.clickedUserState.projects.map(project => {
+                 return(
+                   <Card>
+                     <Image src={project.img_url} />
+                     <Card.Content>
+                       <Card.Header>{project.title}</Card.Header>
+                       <Card.Meta>
+                         <span className='date'>Members Needed: {
+                         project.max_member}</span>
+                       </Card.Meta>
+                       <Card.Description>
+                         {project.description}
+                       </Card.Description>
+                     </Card.Content>
+                   </Card>
+                 )
+                 // <span> {project.title} </span>
+               })}
+            </Card.Group>
              </div>
            </Grid.Column>
          </Grid>
-         <div><h5>Edit User Profie:</h5>
+         <div>
          <Form
            onSubmit={ e => {
              e.preventDefault()
              this.props.handleEditUserForm(this.state.value)
              this.props.userUnselect()
-           }}>
-           <Form.Group widths='equal'>
+           }}><h3>Edit User Profile:</h3>
+           <Form.Group
+             widths='equal'
+             >
              <Form.Input
                name='name'
                value={this.state.value.name}
