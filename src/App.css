@@ -9,8 +9,19 @@
   margin-top: 15px;
 }
 
+.project-buttons {
+	margin-top: 15px;
+}
+
 .topheader {
   height: 400px;
+  background-image: url('https://images.pexels.com/photos/955450/pexels-photo-955450.jpeg');
+  background-position: center;
+  background-size: cover;
+}
+
+.projecttopheader {
+  height: 800px;
   background-image: url('https://images.pexels.com/photos/955450/pexels-photo-955450.jpeg');
   background-position: center;
   background-size: cover;
